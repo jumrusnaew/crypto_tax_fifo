@@ -89,7 +89,7 @@ func main() {
 
 			Profit += (float64(priceSale) - priceBuy)
 			SalPrice += float64(priceSale)
-			fmt.Print("\nSale Amount :", aliasAmount)
+			fmt.Print("\nSale Amount : ", row.Amount-aliasAmount)
 			fmt.Println("\nBalance :", histPrice)
 			fmt.Printf("%v Sale Price : %.2f Buy Price : %.2f Profit : %.2f \n", row.Coin, priceSale, priceBuy, Profit)
 			fmt.Println("---------------------------------------------------------")
