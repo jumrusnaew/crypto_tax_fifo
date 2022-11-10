@@ -103,6 +103,7 @@ func main() {
 		rowIndex += 1
 	}
 	fmt.Println(histPrice)
+	fmt.Println("---------------------------------------------------------")
 	fmt.Println("Sale Total", fmt.Sprintf("%.2f", SalPrice))
 	fmt.Println("Profit Total", fmt.Sprintf("%.2f", Profit))
 	fmt.Println("---------------------------------------------------------")
