@@ -58,20 +58,31 @@ func main() {
 			for o := 0; o < len(histPrice); o += 1 {
 				if aliasAmount > 0 && histPrice[o].amount > 0 {
 					if histPrice[o].coin == row.Coin {
-						fmt.Println(histPrice[o])
-						fmt.Println(lines[histPrice[o].line])
-						fmt.Println("-------------------")
-						histPrice[o].amount -= aliasAmount
-						fmt.Println("histamount = ", histPrice[o].amount)
-						fmt.Println("alias = ", aliasAmount)
-						fmt.Println(":", (histPrice[o].amount * lines[histPrice[o].line].Price))
-						aliasAmount = 0
+						if histPrice[o].amount >= aliasAmount {
 
-						// if histPrice[o].amount >= aliasAmount {
+							fmt.Println("-------------------")
+							fmt.Println(histPrice[o])
+							fmt.Println("-------------------")
+							fmt.Println("   histamount = ", histPrice[o].amount)
+							fmt.Println("   alias = ", aliasAmount)
+							histPrice[o].amount -= aliasAmount
+							priceSale += aliasAmount * row.Price
+							priceBuy += aliasAmount * lines[histPrice[o].line].Price
+							fmt.Printf("   %.2f X %.2f = %.2f\n", aliasAmount, lines[histPrice[o].line].Price, (aliasAmount * lines[histPrice[o].line].Price))
+							aliasAmount = 0
+						} else {
 
-						// } else {
-
-						// }
+							fmt.Println("-------------------")
+							fmt.Println(histPrice[o])
+							fmt.Println("-------------------")
+							fmt.Println("   histamount = ", histPrice[o].amount)
+							fmt.Println("   alias = ", aliasAmount)
+							aliasAmount -= histPrice[o].amount
+							priceSale += histPrice[o].amount * row.Price
+							priceBuy += histPrice[o].amount * lines[histPrice[o].line].Price
+							fmt.Printf("   %.2f X %.2f = %.2f\n", histPrice[o].amount, lines[histPrice[o].line].Price, (histPrice[o].amount * lines[histPrice[o].line].Price))
+							histPrice[o].amount = 0
+						}
 					}
 				}
 			}
@@ -94,11 +105,6 @@ func main() {
 	fmt.Println(histPrice)
 	fmt.Println("Sale Total", fmt.Sprintf("%.2f", SalPrice))
 	fmt.Println("Profit Total", fmt.Sprintf("%.2f", Profit))
-
-	// fmt.Println(t)
-	// fmt.Println(string(t))
-	// reader := bufio.NewReader(os.Stdin)
-	// tex, _, _ := reader.ReadLine()
-	// fmt.Println(tex)
-	// fmt.Println(string(tex))
+	fmt.Println("---------------------------------------------------------")
+	fmt.Println("---------------------------------------------------------")
 }
